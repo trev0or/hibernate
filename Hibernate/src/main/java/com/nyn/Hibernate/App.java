@@ -6,6 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.nyn.Hibernate.model.Name;
+import com.nyn.Hibernate.model.Student;
+
 /**
  * Hello world!
  *
@@ -16,8 +19,11 @@ public class App
     {
         System.out.println( "Hello World!" );
         Student student = new Student();
-        student.setName("abc");
-        student.setAge(3);
+        Name name = new Name();
+        name.setFname("joey");
+        name.setLname("tribioni");
+        student.setName(name);
+        student.setAge(30);
         Configuration configuration =new Configuration().configure().addAnnotatedClass(Student.class);
         SessionFactory factory = configuration.buildSessionFactory();
         Session s = factory.openSession();

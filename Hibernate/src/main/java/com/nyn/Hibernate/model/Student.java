@@ -1,4 +1,4 @@
-package com.nyn.Hibernate;
+package com.nyn.Hibernate.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ public class Student {
 	@Column(name="id")
 	private int id;
 	@Column(name="name")
-	private String name;
+	private Name name;
 	
 	@Column(name="age")
 	private int age;
@@ -29,16 +29,17 @@ public class Student {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
+	public Name getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public void setName(Name name) {
 		this.name = name;
 	}
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", age=" + age + "]";
 	}
+	
 	
 
 }
