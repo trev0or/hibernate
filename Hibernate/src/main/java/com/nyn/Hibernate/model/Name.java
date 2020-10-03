@@ -18,6 +18,10 @@ public class Name {
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
+	@Override
+	public String toString() {
+		return "Name [fname=" + fname + ", lname=" + lname + "]";
+	}
 	
 
 }
