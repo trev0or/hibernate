@@ -24,31 +24,44 @@ public class App
 		 * name = new Name(); name.setFname("chandler"); name.setLname("bing");
 		 * student.setName(name); student.setAge(31);
 		 */
-    	Laptop laptop = new Laptop();
-    	laptop.setLname("lenovo");
-    	laptop.setLid(4);
-    	Stu_dent student = new Stu_dent();
-    	student.setName("naveen");
-    	student.setId(1);
-    	student.setLaptop(laptop);
-        Configuration configuration =new Configuration().configure().addAnnotatedClass(Stu_dent.class).addAnnotatedClass(Laptop.class);
+    	
+		/* one to one mapping */
+		/*
+		 * Laptop laptop = new Laptop(6, "asus"); Stu_dent student = new
+		 * Stu_dent(191,"Nayan",laptop); 
+		 */
+    	Configuration configuration =new Configuration().configure().addAnnotatedClass(Stu_dent.class).addAnnotatedClass(Laptop.class);
         SessionFactory factory = configuration.buildSessionFactory();
-        Session s = factory.openSession();
-        Transaction transaction = s.beginTransaction();
         try {
-	        s.save(student);
-	        s.save(laptop);
+			/*
+			 * s.save(student); s.save(laptop);
+			 */
+        	
 	       // Student st = s.get(Student.class,5);
-	        
+        	
+			/* CACHING */
+        	Session s = factory.openSession();
+            Transaction transaction = s.beginTransaction();
+        	Laptop student = (Laptop) s.get(Laptop.class,4);
+        	System.out.println(student);
+        	Laptop student1 = (Laptop) s.get(Laptop.class,4);
+        	System.out.println(student1);
 	        transaction.commit();
-	       // System.out.println(st);
+	        s.close();
+	        
+	        Session s2 = factory.openSession();
+	        Transaction trans = s2.beginTransaction();
+	        Laptop student2 = (Laptop) s2.get(Laptop.class,4);
+        	System.out.println(student2);
+        	trans.commit();
+	        s2.close();
         }
         catch(Exception e) {
         	 //if(transaction!=null)transaction.rollback();
         	 e.printStackTrace();
         }
         finally {
-        	s.close();
+        	//s.close();
         }        
     }
 }
